@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>스파르타코딩클럽 | 로그인페이지</title>
+  <style>
+    .mytitle {
+      color: white;
+      width: 500px;
+      height: 400px;
+      background-image: url('https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/1561105403576_wW7.jpg?gif=1&w=640&h=640&c=c');
+      background-position: center;
+      background-size: cover;
+      border-radius: 10px;
+      margin: auto;
+    }
+
+    .wrap {
+      margin: auto;
+      width: 50%;
+    }
+
+    .dollor {
+      margin: auto;
+      width: 50%;
+      color: blue;
+    }
+
+    .information {
+      margin: auto;
+      width: 50%;
+    }
+
+    .item {
+      margin: auto;
+      width: 50%;
+    }
+
+    #order_button {
+      margin: 0 auto;
+    }
+
+    * {
+      font-family: 'Hi Melody', cursive;
+    }
+  </style>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Hi+Melody&display=swap" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script>
+    function BUY() {
+      let name = $('#order_name').val();
+      let quantity = $('#order_quantity').val();
+      let address = $('#order_address').val();
+      let phone_number = $('#order_phone_number').val();
+      if (name == '') {
+        alert('성함을 작성해주세요!')
+      }
+      if (quantity == '수량을 선택하세요') {
+        alert('수량을 선택해주세요!')
+      }
+      if (address == '') {
+        alert('주소를 작성해주세요!')
+      }
+      if (phone_number == '') {
+        alert('전화번호를 작성해주세요!')
+      }
+    }
+  </script>
+  <script>
+
+    $(document).ready(function () {
+      $.ajax({
+        type: "GET",
+        url: "https://api.manana.kr/exchange/rate.json",
+        data: {},
+        success: function (response) {
+          for (let i = 0; i < response.length; i++) {
+            let won_dollor = response[1]['rate'];
+            $('#won').text(won_dollor);
+            return;
+          }
+        }
+      })
+    });
+
+  </script>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="mytitle">
+    </div>
+    <div class="item">
+      <h2>1인용 소파베드 <font size="2em">가격:50000원</font>
+      </h2>
+      <p>1인가구에 다양한 용도로 사용할수있는 소파베드!<br>단돈 5만원에 가져가세요</p>
+    </div>
+    <div class="dollor">달러-원환율<span id="won"></span></div>
+    <br>
+    <div class="information">
+      <div class="form-group">
+        <label for="exampleFormControlInput1">주문자 성함</label>
+        <input type="email" class="form-control" id="order_name" placeholder="">
+      </div>
+      <div class="form-group">
+        <label for="exampleFormControlSelect1">주문 수량</label>
+        <select class="form-control" id="order_quantity">
+          <option>수량을 선택하세요</option>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="exampleFormControlInput1">주소</label>
+        <input type="email" class="form-control" id="order_address" placeholder="">
+      </div>
+      <div class="form-group">
+        <label for="exampleFormControlInput1">전화번호</label>
+        <input type="email" class="form-control" id="order_phone_number" placeholder="">
+      </div>
+
+      <button onclick="BUY()" type="button" class="btn btn-primary" id="order_button">주문 하기</button>
+    </div>
+  </div>
+</body>
+
+</html>
